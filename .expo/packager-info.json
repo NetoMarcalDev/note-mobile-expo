@@ -1,0 +1,9 @@
+{
+  "packagerPort": 19001,
+  "packagerPid": 3912,
+  "devToolsPort": 19002,
+  "expoServerPort": 19000,
+  "expoServerNgrokUrl": "https://ws-f6c.anonymous.noteapp.exp.direct",
+  "packagerNgrokUrl": "https://packager.ws-f6c.anonymous.noteapp.exp.direct",
+  "ngrokPid": 8640
+}
