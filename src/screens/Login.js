@@ -15,6 +15,8 @@ import {
 } from 'react-native';
 
 import 'react-native-gesture-handler'
+import { Feather } from '@expo/vector-icons';
+import Icon from 'react-native-vector-icons/Ionicons';
 
 const width = Dimensions.get('screen').width;
 
@@ -27,7 +29,10 @@ export default class Login extends Component {
             description: '',
             password: '',
             message: '',
-            loding: true
+            loding: true,
+            eyePassword: 'ios-eye-off',
+            eyePasswordColor: '#D3D3D3',
+            secureTextEntry: true
         }
     }
 
@@ -91,6 +96,18 @@ export default class Login extends Component {
         return true;
     }
 
+    passwordView(){
+      if(this.state.eyePassword === 'ios-eye-off'){
+         this.setState({eyePassword: 'ios-eye'});
+         this.setState({eyePasswordColor: '#104E8B'});
+         this.setState({secureTextEntry: false});                  
+      }else{
+         this.setState({eyePassword: 'ios-eye-off'});
+         this.setState({eyePasswordColor: '#D3D3D3'});
+         this.setState({secureTextEntry: true});
+      }     
+    }
+
     render(){
         return(
             <View style={styles.conatiner}>
@@ -101,20 +118,31 @@ export default class Login extends Component {
               <Text style={styles.title}>SetyNotas</Text>
     
               <KeyboardAvoidingView behavior="padding">
-                <View style={styles.form}>                    
-                  <TextInput style={styles.input}
-                    placeholder="Usuário..." 
-                    onChangeText={text => this.setState({description: text})}/>
-    
-                  <TextInput style={styles.input}
-                    placeholder="Senha..." 
-                    onChangeText={text => this.setState({password: text})}
-                    secureTextEntry={true} />
-    
+                <View style={styles.form}> 
+                  
+                  <View style={styles.containerTextInput}>
+                    <Feather name="user" size={24} style={styles.imgUser} />
+                    <TextInput style={styles.input}                        
+                        placeholder="Usuário..." 
+                        onChangeText={text => this.setState({description: text})}/>
+                  </View>    
+
+                  <View style={styles.containerTextInput}>
+                    <Icon name="ios-key" size={24} style={styles.imgUser} />
+                    <TextInput style={styles.input}
+                        placeholder="Senha..." 
+                        onChangeText={text => this.setState({password: text})}
+                        secureTextEntry={this.state.secureTextEntry} />
+                      <Icon name={this.state.eyePassword} 
+                        size={22}
+                        style={[styles.imgUser, { marginTop: 8, marginRight: 10, color: this.state.eyePasswordColor } ]} 
+                        onPress={this.passwordView.bind(this)} />
+                  </View>
+
                   <Button 
                     style={styles.button} 
                     title='Entrar'
-                    color='#FF8C00'                  
+                    color='#FF8C00'         
                     onPress={this.logOn.bind(this)} />
                 </View>
               </KeyboardAvoidingView> 
@@ -139,6 +167,20 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         backgroundColor: '#104E8B'
     },
+    containerTextInput: {  
+        flexDirection: 'row',      
+        backgroundColor: '#FFF',
+        height: 45,
+        marginBottom: 5,
+        borderRadius: 5
+    },
+    imgUser: {
+        padding: 5,
+        marginTop: 4,
+        marginLeft: 5,
+        marginRight: 5,
+        color: '#104E8B',
+    },
     logo: {
         width: 150,
         height: 150,
@@ -153,12 +195,14 @@ const styles = StyleSheet.create({
     form: {
         width: width * 0.8
     },
-    input: {        
-        marginBottom: 5,
+    input: {
+        flex: 1,
+        marginTop: 3,
+        marginRight: 5,
+        fontSize: 18,
         padding: 10,
         backgroundColor: '#fff',
         height: 40,
-        borderRadius: 4
     },
     message: {
         marginTop: 15,

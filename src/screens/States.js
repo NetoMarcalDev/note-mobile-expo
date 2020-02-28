@@ -14,7 +14,6 @@ import {
 
 import { Feather } from '@expo/vector-icons';
 import StateEdit from '../components/StateEdit';
-import StateList from '../js/state';
 
 export default class States extends Component {
     
@@ -32,8 +31,6 @@ export default class States extends Component {
 
     componentDidMount(){
         this._show();
-        const teste = StateList;
-        console.log(teste);
     }
    
     _getUser(){
