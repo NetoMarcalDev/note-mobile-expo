@@ -11,7 +11,7 @@ import {
   Button,
   AsyncStorage,
   KeyboardAvoidingView,
-  Alert,
+  TouchableOpacity,
 } from 'react-native';
 
 import 'react-native-gesture-handler'
@@ -138,13 +138,16 @@ export default class Login extends Component {
                         style={[styles.imgUser, { marginTop: 8, marginRight: 10, color: this.state.eyePasswordColor } ]} 
                         onPress={this.passwordView.bind(this)} />
                   </View>
+                  
+                  <TouchableOpacity 
+                    onPress={this.logOn.bind(this)}
+                    style={styles.btnSubmit}
+                  >
+                    <Text style={styles.submitText}>Acessar</Text>
+                  </TouchableOpacity>
 
-                  <Button 
-                    style={styles.button} 
-                    title='Entrar'
-                    color='#FF8C00'         
-                    onPress={this.logOn.bind(this)} />
                 </View>
+
               </KeyboardAvoidingView> 
                 
               <Text style={styles.message} >
@@ -156,7 +159,7 @@ export default class Login extends Component {
 }
 
 const styles = StyleSheet.create({
-    containerLoading: {
+   containerLoading: {
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center'
@@ -208,7 +211,15 @@ const styles = StyleSheet.create({
         marginTop: 15,
         color: '#ffcc33'
     },
-    button: {
-        borderRadius: 4,
-    }    
+    btnSubmit: {
+      backgroundColor: '#35AAFF',
+      height: 45,
+      alignItems: 'center',
+      justifyContent: 'center',
+      borderRadius: 7
+    },
+    submitText: {
+      color: '#FFF',
+      fontSize: 18
+    },    
 });
